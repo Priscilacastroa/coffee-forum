@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function Home() {
   const [data, setData] = useState([]); // Responsavel pelo axios
@@ -30,8 +31,13 @@ export function Home() {
 
   return (
     <>
+      <h1>Tags</h1>
       {tagList.map((currentTag) => {
-        return <h1 key={currentTag}>{currentTag}</h1>;
+        return (
+          <Link to={`/tag/${currentTag}`} key={currentTag}>
+            <p>{currentTag}</p>
+          </Link>
+        );
       })}
     </>
   );

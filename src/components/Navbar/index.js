@@ -8,9 +8,9 @@ export function Navbar() {
           Coffee Forum{" "}
         </Link>
       </h1>
-      <ul>
-        <li></li>
-      </ul>
+      <div>
+        <Link to="/create-topic">Criar um topico</Link>
+      </div>
     </nav>
   );
 }
