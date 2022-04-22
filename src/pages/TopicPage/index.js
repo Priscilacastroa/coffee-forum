@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { InputText } from "../../components/InputText";
 import { Button } from "../../components/Button";
 
 export function TopicPage() {
   const { topicId } = useParams();
+  const navigate = useNavigate();
   const [topic, setTopic] = useState({ tags: [], answers: [] });
   const [form, setForm] = useState({
     body: "",
@@ -47,11 +48,27 @@ export function TopicPage() {
     setSubmitStatus(true);
   }
 
+  async function handleDelete() {
+    await axios.delete(
+      `https://ironrest.herokuapp.com/coffee-forum/${topicId}`
+    );
+
+    navigate("/");
+  }
+
   return (
     <>
       <h1>{topic.title}</h1>
       <strong>{topic.owner}</strong>
       <p>{topic.description}</p>
+
+      <Link to={`/edit/${topicId}`}>
+        <Button>Editar</Button>
+      </Link>
+
+      <Button isDanger onClick={handleDelete}>
+        Delete
+      </Button>
 
       {topic.tags.map((currentTag) => (
         <small className="m-2" style={{ color: "gray" }}>

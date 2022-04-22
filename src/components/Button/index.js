@@ -3,7 +3,7 @@ export function Button(props) {
     <button
       type={props.type}
       onClick={props.onClick}
-      class="btn btn-primary m-2"
+      className={props.isDanger ? "btn btn-danger m-2" : "btn btn-primary m-2"}
     >
       {props.children}
     </button>
